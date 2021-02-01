@@ -50,6 +50,15 @@ export async function getStaticProps({ params, preview = false }) {
   const productData = await getClient(preview).fetch(query, {
     slug: params.slug,
   });
+  
+  if(!productData) {
+    return {
+       redirect: {
+        destination: '/',
+        permanent: false,
+      }
+    }
+  }
 
   return {
     props: { preview, productData },
