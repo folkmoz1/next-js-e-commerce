@@ -28,9 +28,19 @@ export async function getStaticProps ({ params = {}, preview = false }) {
   const { page: pageData } = await getClient(preview).fetch(query, {
     slug
   })
+  
+  if (!pageData) {
+    return {
+       redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
 
   return {
-    props: { preview, pageData, slug }
+    props: { preview, pageData, slug },
+    revalidate: 1
   }
 }
 
