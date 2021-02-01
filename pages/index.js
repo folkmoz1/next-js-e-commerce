@@ -36,6 +36,7 @@ export async function getStaticProps({ params = {}, preview = false }) {
       preview,
       productsData,
     },
+    revalidate: 1
   };
 }
 
